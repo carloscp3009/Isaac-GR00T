@@ -241,7 +241,7 @@ class Gr00tPolicy(BasePolicy):
         metadata_path = exp_cfg_dir / "metadata.json"
         with open(metadata_path, "r") as f:
             metadatas = json.load(f)
-
+        print(f"Loaded metadata from {metadata_path}")
         # Get metadata for the specific embodiment
         metadata_dict = metadatas.get(self.embodiment_tag.value)
         if metadata_dict is None:

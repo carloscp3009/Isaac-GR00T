@@ -77,13 +77,16 @@ def get_frames_by_timestamps(
             raise ValueError(f"Unable to open video file: {video_path}")
         # Retrieve the total number of frames
         num_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        print(f"Total number of frames in video: {num_frames}")
         # Calculate timestamps for each frame
         fps = cap.get(cv2.CAP_PROP_FPS)
+        print(f"Frames per second (FPS): {fps}")
         frame_ts = np.arange(num_frames) / fps
         frame_ts = frame_ts[:, np.newaxis]  # Reshape to (num_frames, 1) for broadcasting
         # Map each requested timestamp to the closest frame index
         indices = np.abs(frame_ts - timestamps).argmin(axis=0)
         frames = []
+        print(f"{indices =}")
         for idx in indices:
             cap.set(cv2.CAP_PROP_POS_FRAMES, idx)
             ret, frame = cap.read()

@@ -141,9 +141,15 @@ class LeRobotSingleDataset(Dataset):
             self.tag = embodiment_tag
 
         self._metadata = self._get_metadata(EmbodimentTag(self.tag))
+        print(f"{self.dataset_name = }")
+
         self._trajectory_ids, self._trajectory_lengths = self._get_trajectories()
         self._all_steps = self._get_all_steps()
+        print(f"{self.all_steps = }")
+
         self._modality_keys = self._get_modality_keys()
+        print(f"{self.modality_keys = }")
+
         self._delta_indices = self._get_delta_indices()
         self.set_transforms_metadata(self.metadata)
         self.set_epoch(0)
@@ -272,6 +278,7 @@ class LeRobotSingleDataset(Dataset):
         with open(modality_meta_path, "r") as f:
             le_modality_meta = LeRobotModalityMetadata.model_validate(json.load(f))
         for modality in ["state", "action"]:
+            print(f"{modality = }")
             simplified_modality_meta[modality] = {}
             le_state_action_meta: dict[str, LeRobotStateActionMetadata] = getattr(
                 le_modality_meta, modality
@@ -652,6 +659,7 @@ class LeRobotSingleDataset(Dataset):
         # This is equivalent to padding the video with extra frames at the beginning and end
         step_indices = np.maximum(step_indices, 0)
         step_indices = np.minimum(step_indices, self.trajectory_lengths[trajectory_index] - 1)
+        # print(f"{step_indices=}")
         assert key.startswith("video."), f"Video key must start with 'video.', got {key}"
         # Get the sub-key
         key = key.replace("video.", "")
@@ -662,6 +670,8 @@ class LeRobotSingleDataset(Dataset):
         timestamp: np.ndarray = self.curr_traj_data["timestamp"].to_numpy()
         # Get the corresponding video timestamps from the step indices
         video_timestamp = timestamp[step_indices]
+        # print(f"{timestamp=}")
+        # print(f"{video_timestamp=}")
 
         return get_frames_by_timestamps(
             video_path.as_posix(),
@@ -769,6 +779,10 @@ class LeRobotSingleDataset(Dataset):
         original_key = subkey_meta.original_key
         if original_key is None:
             original_key = key
+        print(f"Using original key {original_key} for annotation {subkey}")
+        print(self.curr_traj_data)
+        print(self.curr_traj_data.columns)
+        print(self.curr_traj_data.keys())
         for i in range(len(step_indices)):
             task_indices.append(self.curr_traj_data[original_key][step_indices[i]].item())
         return self.tasks.loc[task_indices]["task"].tolist()

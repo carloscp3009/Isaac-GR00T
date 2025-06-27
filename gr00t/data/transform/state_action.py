@@ -388,6 +388,8 @@ class StateActionTransform(InvertibleModalityTransform):
         modality_metadata = dataset_metadata.modalities
 
         # Check that all state keys specified in apply_to have their modality_metadata
+        print(f"Applying to: {self.apply_to}")
+        print(f"Modality metadata: {self.modality_metadata}")
         for key in self.apply_to:
             split_key = key.split(".")
             assert len(split_key) == 2, "State keys should have two parts: 'modality.key'"

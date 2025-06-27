@@ -137,6 +137,9 @@ class TrainRunner:
                 f"Set global batch size to {global_batch_size}, set gradient accumulation steps to {grad_acc}"
             )
 
+        print(
+            f"GPU memory before DualBrainTrainer: {torch.cuda.memory_allocated() / 1024 / 1024 / 1024} GB"
+        )
         # Create the trainer
         trainer = DualBrainTrainer(
             model=model,
@@ -145,6 +148,7 @@ class TrainRunner:
             data_collator=data_collator,
             compute_dtype=compute_dtype,
         )
+        print(f"GPU memory after: {torch.cuda.memory_allocated() / 1024 / 1024 / 1024} GB")
 
         # Add checkpoint format callback to ensure experiment_cfg is copied to each checkpoint
         run_name = training_args.run_name
