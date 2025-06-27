@@ -22,6 +22,7 @@ from transformers import Trainer, TrainerCallback
 
 def safe_save_model_for_hf_trainer(trainer: Trainer, output_dir: str):
     """Collects the state dict and dump to disk."""
+    print(f"===================================================Saving the model in {output_dir} ========================================================================")
     if trainer.deepspeed:
         torch.cuda.synchronize()
         trainer.save_model(output_dir, _internal_call=True)
@@ -32,6 +33,7 @@ def safe_save_model_for_hf_trainer(trainer: Trainer, output_dir: str):
         cpu_state_dict = {key: value.cpu() for key, value in state_dict.items()}
         del state_dict
         trainer._save(output_dir, state_dict=cpu_state_dict)  # noqa
+    print(f"=================================================== Model saved in {output_dir} ========================================================================")
 
 
 class CheckpointFormatCallback(TrainerCallback):
