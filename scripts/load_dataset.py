@@ -196,7 +196,7 @@ def load_dataset(
     )  # take first one, assume all have same modality keys
     modality_keys_dict = get_modality_keys(single_dataset_path)
     video_modality_keys = modality_keys_dict["video"]
-    language_modality_keys = modality_keys_dict["annotation"]
+    language_modality_keys = modality_keys_dict.get("annotation", False)
     state_modality_keys = modality_keys_dict["state"]
     action_modality_keys = modality_keys_dict["action"]
 
@@ -204,6 +204,7 @@ def load_dataset(
 
     print(f"state_modality_keys: {state_modality_keys}")
     print(f"action_modality_keys: {action_modality_keys}")
+    print(f"language_modality_keys: {language_modality_keys}")
 
     # remove dummy_tensor from state_modality_keys
     state_modality_keys = [key for key in state_modality_keys if key != "state.dummy_tensor"]
@@ -329,6 +330,7 @@ def load_dataset(
         plot_state_action_space(state_dict, action_dict)
         print("Plotted state and action space")
 
+    print("I got here!")
     fig, axs = plt.subplots(4, total_images // 4, figsize=(20, 10))
     for i, ax in enumerate(axs.flat):
         ax.imshow(images_list[i])

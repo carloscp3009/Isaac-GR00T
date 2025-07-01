@@ -900,7 +900,7 @@ class ErgoCubFullBodyDataConfig(BaseDataConfig):
     ]
     language_keys = ["annotation.human.action.task_description"]
     observation_indices = [0]
-    action_indices = list(range(2))
+    action_indices = list(range(16))
 
     def modality_config(self):
         video_modality = ModalityConfig(
@@ -966,7 +966,9 @@ class ErgoCubFullBodyDataConfig(BaseDataConfig):
                 max_action_dim=32,
             ),
         ]
-
+        print("="*100)
+        print(f"{self.action_indices =}")
+        print("="*100)
         return ComposedModalityTransform(transforms=transforms)
 
 

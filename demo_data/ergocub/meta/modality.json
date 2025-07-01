@@ -69,7 +69,6 @@
         }
     },
     "annotation": {
-        "human.action.task_description": {},
-        "human.validity": {}
+        "human.action.task_description": {}
     }
 }

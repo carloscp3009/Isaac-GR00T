@@ -124,7 +124,7 @@
             }
         },
         "annotation.human.action.task_description": {
-            "dtype": "string",
+            "dtype": "int64",
             "shape": [
                 1
             ]

@@ -94,6 +94,9 @@ class GR00T_N1_5(PreTrainedModel):
         error_msg = ERROR_MSG
         if "action" in inputs:
             action = inputs["action"]
+            print(f"{action.shape = }")
+            print(f"{self.action_horizon = }")
+            print(f"{self.action_dim = }")
             type_ok = isinstance(action, torch.Tensor)
             shape_ok = (
                 len(action.shape) == 3
@@ -221,9 +224,13 @@ class GR00T_N1_5(PreTrainedModel):
             )
             local_model_path = pretrained_model_name_or_path
 
+        print(local_model_path)
+        input()
         pretrained_model = super().from_pretrained(
             local_model_path, local_model_path=local_model_path, **kwargs
         )
+        print(f"pretrained model action_horizon {pretrained_model.action_horizon}")
+        print(f"pretrained model action_dim {pretrained_model.action_dim}")
 
         pretrained_model.backbone.set_trainable_parameters(
             tune_visual=tune_visual, tune_llm=tune_llm
@@ -231,6 +238,10 @@ class GR00T_N1_5(PreTrainedModel):
         pretrained_model.action_head.set_trainable_parameters(
             tune_projector=tune_projector, tune_diffusion_model=tune_diffusion_model
         )
+        print(f"{kwargs = }")
+        print(f"pretrained model action_horizon {pretrained_model.action_horizon}")
+        print(f"pretrained model action_dim {pretrained_model.action_dim}")
+        print(f"Tune Projector {tune_projector}")
         return pretrained_model
 
 
