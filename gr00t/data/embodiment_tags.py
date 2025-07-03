@@ -32,6 +32,11 @@ class EmbodimentTag(Enum):
     The AgiBot Genie-1 with gripper dataset.
     """
 
+    ERGOCUB = "ergocub"
+    """
+    The ErgoCub dataset.
+    """
+
     NEW_EMBODIMENT = "new_embodiment"
     """
     Any new embodiment for finetuning.
@@ -44,4 +49,5 @@ EMBODIMENT_TAG_MAPPING = {
     EmbodimentTag.OXE_DROID.value: 17,
     EmbodimentTag.AGIBOT_GENIE1.value: 26,
     EmbodimentTag.GR1.value: 24,
+    EmbodimentTag.ERGOCUB.value: 31,
 }
