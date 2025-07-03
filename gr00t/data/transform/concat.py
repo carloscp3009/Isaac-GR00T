@@ -180,6 +180,10 @@ class ConcatTransform(InvertibleModalityTransform):
         return data
 
     def __call__(self, data: dict) -> dict:
+        print(f"{data.keys() = }")
+        print(f"{data['state.neck'].shape = }")
+        print(f"{data['state.neck'] = }")
+        # print(f"{data['action'].shape = }")
         return self.apply(data)
 
     def get_modality_metadata(self, key: str) -> StateActionMetadata:

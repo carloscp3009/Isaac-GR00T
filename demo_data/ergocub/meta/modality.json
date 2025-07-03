@@ -2,65 +2,65 @@
     "state": {
         "neck": {
             "start": 0,
-            "end": 3
+            "end": 4
         },
         "torso": {
             "start": 4,
-            "end": 6
+            "end": 7
         },
         "left_arm": {
             "start": 7,
-            "end": 10
+            "end": 14
         },
         "left_hand": {
-            "start": 11,
-            "end": 13
+            "start": 14,
+            "end": 19
         },
         "right_arm": {
-            "start": 14,
-            "end": 17
+            "start": 19,
+            "end": 26
         },
         "right_hand": {
-            "start": 18,
-            "end": 20
+            "start": 26,
+            "end": 31
         },
         "legs": {
-            "start": 21,
-            "end": 23
+            "start": 31,
+            "end": 34
         },
         "currents": {
-            "start": 24,
-            "end": 41
+            "start": 34,
+            "end": 52
         }
     },
     "action": {
         "neck": {
             "start": 0,
-            "end": 3
+            "end": 4
         },
         "torso": {
             "start": 4,
-            "end": 6
+            "end": 7
         },
         "left_arm": {
             "start": 7,
-            "end": 10
+            "end": 14
         },
         "left_hand": {
-            "start": 11,
-            "end": 13
+            "start": 14,
+            "end": 19
         },
         "right_arm": {
-            "start": 14,
-            "end": 17
+            "start": 19,
+            "end": 26
         },
         "right_hand": {
-            "start": 18,
-            "end": 20
+            "start": 26,
+            "end": 31
         },
         "legs": {
-            "start": 21,
-            "end": 23
+            "start": 31,
+            "end": 34
         }
     },
     "video": {

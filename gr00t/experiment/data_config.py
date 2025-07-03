@@ -896,7 +896,7 @@ class ErgoCubFullBodyDataConfig(BaseDataConfig):
         "action.left_hand",
         "action.right_arm",
         "action.right_hand",
-        "action.legs",
+        # "action.legs",
     ]
     language_keys = ["annotation.human.action.task_description"]
     observation_indices = [0]
@@ -923,7 +923,7 @@ class ErgoCubFullBodyDataConfig(BaseDataConfig):
             "video": video_modality,
             "state": state_modality,
             "action": action_modality,
-            # "language": language_modality,
+            "language": language_modality,
         }
         return modality_configs
 

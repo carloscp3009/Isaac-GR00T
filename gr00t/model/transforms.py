@@ -249,6 +249,8 @@ class GR00TTransform(InvertibleModalityTransform):
             return state, state_mask, n_state_tokens
 
         state = data["state"]
+        print("**"*50)
+        print(f"{state.shape = }")
         assert state.shape[0] == self.state_horizon, f"{state.shape=}, {self.state_horizon=}"
 
         n_state_dims = state.shape[-1]
@@ -280,6 +282,8 @@ class GR00TTransform(InvertibleModalityTransform):
             return actions, actions_mask, n_action_tokens
 
         actions = data["action"]
+        print("**"*50)
+        print(f"{actions.shape = }")
         assert actions.shape[0] == self.action_horizon, f"{actions.shape=}, {self.action_horizon=}"
 
         n_action_tokens = actions.shape[0]  # T

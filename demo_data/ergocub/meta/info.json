@@ -1,15 +1,15 @@
 {
     "codebase_version": "v2.1",
     "robot_type": "ergoCub",
-    "total_episodes": 2,
-    "total_frames": 6002,
+    "total_episodes": 1,
+    "total_frames": 9421,
     "total_tasks": 1,
-    "total_videos": 2,
+    "total_videos": 1,
     "total_chunks": 1,
     "chunks_size": 1000,
     "fps": 30,
     "splits": {
-        "train": "0:2"
+        "train": "0:1"
     },
     "data_path": "data/chunk-{episode_chunk:03d}/episode_{episode_index:06d}.parquet",
     "video_path": "videos/chunk-{episode_chunk:03d}/{video_key}/episode_{episode_index:06d}.mp4",
@@ -17,7 +17,7 @@
         "observation.state": {
             "dtype": "float32",
             "shape": [
-                42
+                52
             ],
             "names": {
                 "joints": [
@@ -35,6 +35,11 @@
                     "l_wrist_roll",
                     "l_wrist_pitch",
                     "l_wrist_yaw",
+                    "l_thumb_add",
+                    "l_thumb_oc",
+                    "l_index_oc",
+                    "l_middle_oc",
+                    "l_ring_pinky_oc",
                     "r_shoulder_pitch",
                     "r_shoulder_roll",
                     "r_shoulder_yaw",
@@ -42,6 +47,11 @@
                     "r_wrist_roll",
                     "r_wrist_pitch",
                     "r_wrist_yaw",
+                    "r_thumb_add",
+                    "r_thumb_oc",
+                    "r_index_oc",
+                    "r_middle_oc",
+                    "r_ring_pinky_oc",
                     "/joypad/element_0",
                     "/joypad/element_1",
                     "/joypad/element_2",
@@ -69,7 +79,7 @@
         "action": {
             "dtype": "float32",
             "shape": [
-                24
+                34
             ],
             "names": {
                 "joints": [
@@ -87,6 +97,11 @@
                     "l_wrist_roll",
                     "l_wrist_pitch",
                     "l_wrist_yaw",
+                    "l_thumb_add",
+                    "l_thumb_oc",
+                    "l_index_oc",
+                    "l_middle_oc",
+                    "l_ring_pinky_oc",
                     "r_shoulder_pitch",
                     "r_shoulder_roll",
                     "r_shoulder_yaw",
@@ -94,6 +109,11 @@
                     "r_wrist_roll",
                     "r_wrist_pitch",
                     "r_wrist_yaw",
+                    "r_thumb_add",
+                    "r_thumb_oc",
+                    "r_index_oc",
+                    "r_middle_oc",
+                    "r_ring_pinky_oc",
                     "/joypad/element_0",
                     "/joypad/element_1",
                     "/joypad/element_2"
@@ -124,6 +144,12 @@
             }
         },
         "annotation.human.action.task_description": {
+            "dtype": "int64",
+            "shape": [
+                1
+            ]
+        },
+        "annotation.human.validity": {
             "dtype": "int64",
             "shape": [
                 1
