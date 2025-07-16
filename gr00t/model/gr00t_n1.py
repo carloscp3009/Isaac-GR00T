@@ -86,6 +86,12 @@ class GR00T_N1_5(PreTrainedModel):
         self.action_dim = config.action_dim
         self.compute_dtype = config.compute_dtype
 
+    def reset_weights(self):
+        config = self.config
+        action_head_cfg = FlowmatchingActionHeadConfig(**config.action_head_cfg)
+        self.action_head = FlowmatchingActionHead(action_head_cfg)
+        self.action_head.set_trainable_parameters(tune_projector=True, tune_diffusion_model=False)
+
     def validate_inputs(self, inputs):
         # NOTE -- this should be handled internally by the model
         # however, doing that will likely be breaking changes -- so we'll need to do it after the deadline
