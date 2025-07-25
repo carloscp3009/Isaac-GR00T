@@ -25,8 +25,10 @@ from transformers import AutoConfig, AutoModel, PretrainedConfig, PreTrainedMode
 from transformers.feature_extraction_utils import BatchFeature
 
 from .action_head.flow_matching_action_head import (
+    CategorySpecificMLP,
     FlowmatchingActionHead,
     FlowmatchingActionHeadConfig,
+    MultiEmbodimentActionEncoder,
 )
 from .backbone import EagleBackbone
 
@@ -86,11 +88,36 @@ class GR00T_N1_5(PreTrainedModel):
         self.action_dim = config.action_dim
         self.compute_dtype = config.compute_dtype
 
-    def reset_weights(self):
+    def reset_head_weights(self):
         config = self.config
         action_head_cfg = FlowmatchingActionHeadConfig(**config.action_head_cfg)
         self.action_head = FlowmatchingActionHead(action_head_cfg)
         self.action_head.set_trainable_parameters(tune_projector=True, tune_diffusion_model=False)
+
+    def modify_embodiment_dims(
+        self,
+    ):
+        config = self.config.action_head_cfg
+        action_dim = 42
+        print(config)
+
+        self.action_head.state_encoder = CategorySpecificMLP(
+            num_categories=1,  # config.max_num_embodiments,
+            input_dim=config["max_state_dim"],
+            hidden_dim=config["hidden_size"],
+            output_dim=config["input_embedding_dim"],
+        )
+        self.action_head.action_encoder = MultiEmbodimentActionEncoder(
+            action_dim=action_dim,
+            hidden_size=config["input_embedding_dim"],
+            num_embodiments=1,  # config.max_num_embodiments,
+        )
+        self.action_head.action_decoder = CategorySpecificMLP(
+            num_categories=1,  # config.max_num_embodiments,
+            input_dim=config["hidden_size"],
+            hidden_dim=config["hidden_size"],
+            output_dim=action_dim,  # self.action_dim,
+        )
 
     def validate_inputs(self, inputs):
         # NOTE -- this should be handled internally by the model
