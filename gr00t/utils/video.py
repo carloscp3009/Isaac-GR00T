@@ -115,11 +115,25 @@ def get_frames_by_timestamps(
             loaded_ts.append(current_ts)
             if current_ts >= last_ts:
                 break
-            if len(loaded_frames) >= len(timestamps):
-                break
+            # if len(loaded_frames) >= len(timestamps):
+            #     break
+
         reader.container.close()
         reader = None
-        frames = np.array(loaded_frames)
+
+        # Convert to NumPy arrays
+        loaded_frames = np.array(loaded_frames)  # shape (N, C, H, W)
+        loaded_ts = np.array(loaded_ts)  # shape (N,)
+        query_ts = np.array(timestamps)  # shape (M,)
+
+        # Compute pairwise absolute distances (M x N)
+        dist = np.abs(query_ts[:, None] - loaded_ts[None, :])
+        argmin = dist.argmin(axis=1)
+
+        frames = loaded_frames[argmin]
+        assert frames.shape[0] == len(
+            timestamps
+        ), "Number of frames does not match number of timestamps when getting video"
         return frames.transpose(0, 2, 3, 1)
     else:
         raise NotImplementedError

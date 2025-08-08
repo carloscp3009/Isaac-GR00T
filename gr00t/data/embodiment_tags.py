@@ -45,9 +45,9 @@ class EmbodimentTag(Enum):
 
 # Embodiment tag string: to projector index in the Action Expert Module
 EMBODIMENT_TAG_MAPPING = {
-    EmbodimentTag.NEW_EMBODIMENT.value: 31,
+    EmbodimentTag.NEW_EMBODIMENT.value: 0,
     EmbodimentTag.OXE_DROID.value: 17,
     EmbodimentTag.AGIBOT_GENIE1.value: 26,
     EmbodimentTag.GR1.value: 24,
-    EmbodimentTag.ERGOCUB.value: 31,
+    EmbodimentTag.ERGOCUB.value: 0,
 }

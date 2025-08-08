@@ -878,7 +878,7 @@ class AgibotGenie1DataConfig:
 
 
 class ErgoCubFullBodyDataConfig(BaseDataConfig):
-    video_keys = ["video.ego_view"]
+    video_keys = ["video.ego_view"]  # , "video.past_view"]
     state_keys = [
         "state.neck",
         "state.torso",
@@ -899,8 +899,8 @@ class ErgoCubFullBodyDataConfig(BaseDataConfig):
         # "action.legs",
     ]
     language_keys = ["annotation.human.action.task_description"]
-    observation_indices = [0]
-    action_indices = list(range(16))
+    observation_indices = [0, 15, 30]
+    action_indices = list(range(30, 46))
 
     def modality_config(self):
         video_modality = ModalityConfig(
